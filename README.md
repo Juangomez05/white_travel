@@ -7,58 +7,100 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Versiones y  que se utilizaran para este proyecto
+Laravel 9, Xampp (Para descargar la version estable de Php), composer, Descargar Docker 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Como crear archivo .yml para la conexion de la base de datos
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Crear un archivo global llamado docker-compose.yml en caso omiso que no este; agregar el siguiente codigo
 
-## Learning Laravel
+```
+version: '3.9'
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+services:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+  postgresdb:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      DATABASE_HOST: 127.0.0.1
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: whitetravelDb
+  admin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - 80:80
+    depends_on:
+      - postgresdb
+```
 
-## Laravel Sponsors
+## Archivo .env
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Agregar la conexion de la base de datos
 
-### Premium Partners
+```
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=whitetravelDb
+DB_USERNAME=root
+DB_PASSWORD=root
+```
+Si te ocurre algun error en la conexion, veriifica el archivo que esta ubicado en la folder Xampp
+\php\php.ini y habilita la conexion a "Pgsql" quitandole el comentario ";".
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Ejecucion de la base de datos
 
-## Contributing
+Abrir una terminal y ejecutar el codigo 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+docker-compose up
+```
 
-## Code of Conduct
+```
+Nota: si necesitas ayuda en la instalacion de postgres y docker https://www.youtube.com/watch?v=uKlRp6CqpDg 
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+minuto 8:54
 
-## Security Vulnerabilities
+```
+## Cargar la estructura de las tablas
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Abrimos una terminal desde nuestro proyecto
 
-## License
+pegamos el siguiente comando
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+php artisan migrate
+```
+
+Este comando nos permitira cargar la estructura de nuestras tablas. 
+
+
+## Cargar informacion de las tablas
+
+Se adjuntara un archivo tablas.rar el cual tendra las lineas sql para cada tabla
+
+ - **hotels** 
+ - **touristic_places**
+ - **restaurants**
+ - **users**
+
+### Como cargar la informacion de las tablas?
+
+- 1 Buscamos el archivo **tablas.rar**
+
+- 2 Extraemos la informacion de cada una de las tablas
+
+- 3 Abrimos Pgadmin y nos dirigimos al apartado donde se encuentran las tablas
+
+- 4  Damos clic derecho a cualquier tabla y buscamos la opcion **script** y seleccionamos **script Insert**. 
+
+- 5 Copiamos la informacion que se encuentrar en cada uno de los sql y pegamos en cada tabla correspondiente reemplazando **El codigo Insert**.
