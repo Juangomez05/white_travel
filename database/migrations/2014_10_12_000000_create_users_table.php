@@ -11,20 +11,22 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up(): void
-{
-    Schema::create('users', function (Blueprint $table) {
-        $table->id();
-        $table->string('name_user', 45);
-        $table->string('email_user', 255);
-        $table->string('email_verified_at')->nullable();
-        $table->string('password_user', 255);
-        $table->integer('phone_user')->notNull(); // Cambié serial por varchar, ya que generalmente el número de teléfono no es autoincremental
-        $table->timestamp('birthdame_user')->nullable();;
-        $table->string('remember_token', 100)->nullable();
-        $table->timestamps();
-    });
-}
+    public function up()
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('phone');
+            $table->date('birthday');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->string("user_type");
+            $table->rememberToken();
+            $table->timestamps();
+        });
+    }
+
     /**
      * Reverse the migrations.
      *

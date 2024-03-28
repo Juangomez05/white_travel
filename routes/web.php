@@ -28,12 +28,16 @@ Route::get('/', function () {
 
 // Ruta Login
 Route::get('/login', [LoginController::class, 'login'])->name('login.login');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('autenticacion');
+
+
+//Ruta registro
+Route::get('/register', [RegisterController::class, 'show_register'])->name('login.register');
+Route::post('/register', [RegisterController::class, 'register'])->name('register_post');
 
 //Ruta Inicio
 Route::get('/welcome', [WelcomeController::class, 'welcome'])->name('welcome');
 
-//Ruta registro
-Route::get('/register', [RegisterController::class, 'register'])->name('login.register');
 
 //Ruta Hoteles
 Route::get('/hoteles', [HotelesController::class, 'hoteles'])->name('hoteles');

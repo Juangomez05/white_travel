@@ -37,7 +37,8 @@
                             única</h1>
                     </div>
                     <p class="text-white">White travel, una pagina web dedicada al turismo de la ciudad de Popayan,
-                        su enfoque principal es proporcionarte recomendaciones personalizadas, basadas en tus preferencias y presupuesto.</p>
+                        su enfoque principal es proporcionarte recomendaciones personalizadas, basadas en tus
+                        preferencias y presupuesto.</p>
                     <ul class="list-inline text-white m-0">
                         <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Sistema de recomendacion
                         </li>
@@ -52,47 +53,50 @@
                         <div class="card-header" style="text-align: center; padding: 1.30rem;">
                             <h1 class="h2" style="color:#fff">Iniciar sesión</h1>
                         </div>
-                        <div class="card-body rounded-bottom bg-white p-5 bg-transparent">
-                            <form>
-                                <div class="form-group">
-                                    <input type="email" name="email" class="form-control _ge_de_ol" type="text" placeholder="Correo electrónico" required="" aria-required="true">
+                        <form class="user" method="POST" action="{{ route('autenticacion') }}">
+                            @csrf
+                            <div class="form-group">
+                                <input type="email" name="email" id="inputEmail" class="form-control _ge_de_ol"
+                                    type="text" placeholder="Correo electrónico" required="" aria-required="true">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" id="inputPassword" class="form-control _ge_de_ol"
+                                    type="text" placeholder="Contraseña" required="" aria-required="true">
+                            </div>
+                            <div class="checkbox form-group">
+                                <div class="form-check" style="color:aliceblue">
+                                    <input class="form-check-input" type="checkbox" value="" id="">
+                                    <label class="form-check-label " for="">
+                                        Recuerdame
+                                    </label>
                                 </div>
-                                <div class="form-group">
-                                    <input type="password" name="password" class="form-control _ge_de_ol" type="text" placeholder="Contraseña" required="" aria-required="true">
-                                </div>
-                                <div class="checkbox form-group">
-                                    <div class="form-check" style="color:aliceblue">
-                                        <input class="form-check-input" type="checkbox" value="" id="">
-                                        <label class="form-check-label " for="">
-                                            Recuerdame
-                                        </label>
-                                    </div>
-                                    <a href="#">Olvido contraseña</a>
-                                </div>
-                                <div>
-                                    <a href="{{ route('welcome') }}" class="btn btn-primary btn-user btn-block">
-                                        Entrar
-                                    </a>
-                                </div>
-                                <div class="form-group">
-                                    <p class="text-black" style="color:rgb(204, 204, 204)">¿No tienes una cuenta?</p>
-                                    <a href="{{ route('login.register') }}">Regístrate</a>
-                                </div>
-                        </div>
+                                <a href="#">Olvido contraseña</a>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    Entrar
+                                </button>
+                            </div>
                         </form>
+                        <div class="form-group">
+                            <p class="text-black" style="color:rgb(204, 204, 204)">¿No tienes una cuenta?</p>
+                            <a href="{{ route('login.register') }}">Regístrate</a>
+                        </div>
                     </div>
+
                 </div>
             </div>
-            <footer class="text-center text-white mt-5">
-                <p>White Travel© 2024 </p>
-                <nav>
-                    <a href="#">Términos de uso</a>
-                    <a href="#">Privacidad</a>
-                    <a href="#">Política de cookies</a>
-                    <a href="#">Centro de ayuda</a>
-                </nav>
-            </footer>
         </div>
+        <footer class="text-center text-white mt-5">
+            <p>White Travel© 2024 </p>
+            <nav>
+                <a href="#">Términos de uso</a>
+                <a href="#">Privacidad</a>
+                <a href="#">Política de cookies</a>
+                <a href="#">Centro de ayuda</a>
+            </nav>
+        </footer>
+    </div>
     </div>
     <!-- Registration End -->
 
